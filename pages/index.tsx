@@ -19,7 +19,7 @@ const Home: NextPage = () => {
 	const [, switchNetwork] = useNetwork();
 
 	const signatureDrop = useSignatureDrop(
-		'0x427c8504A9952744105683Cd3CE179902c5503cE'
+		'0x81c064496a677D8942358fC2b3Ff8F3f1bC15C01'
 	);
 
 	async function claim() {
@@ -34,7 +34,7 @@ const Home: NextPage = () => {
 		}
 
 		try {
-			const tx = await signatureDrop?.claimTo(address, 1);
+			await signatureDrop?.claimTo(address, 1);
 			alert(`Succesfully minted NFT!`);
 		} catch (error: any) {
 			alert(error?.message);
