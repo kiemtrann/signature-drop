@@ -41,12 +41,12 @@ We wrap our application in the `ThirdwebProvider` component in the [\_app.tsx](.
 const activeChainId = ChainId.Goerli;
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return (
-    <ThirdwebProvider desiredChainId={activeChainId}>
-      <Component {...pageProps} />
-      <ThirdwebGuideFooter />
-    </ThirdwebProvider>
-  );
+	return (
+		<ThirdwebProvider desiredChainId={activeChainId}>
+			<Component {...pageProps} />
+			<ThirdwebGuideFooter />
+		</ThirdwebProvider>
+	);
 }
 ```
 
@@ -63,7 +63,7 @@ We then connect to our signature drop contract by using its contract address:
 
 ```jsx
 const signatureDrop = useSignatureDrop(
-  "0xb90a18e9270d44F6e7D06e5Eac32C6Ea881CCaB2"
+	'0x427c8504A9952744105683Cd3CE179902c5503cE'
 );
 ```
 
@@ -87,10 +87,10 @@ Firstly, we request a mint signature from the API:
 
 ```jsx
 const signedPayloadReq = await fetch(`/api/generate-mint-signature`, {
-  method: "POST",
-  body: JSON.stringify({
-    address: address,
-  }),
+	method: 'POST',
+	body: JSON.stringify({
+		address: address,
+	}),
 });
 ```
 
@@ -101,9 +101,9 @@ Then, on the server-side API route, we make a check to see if the user qualifies
 const { address } = JSON.parse(req.body);
 
 // Get the Early Access NFT Edition Drop contract
-const polygonSDK = new ThirdwebSDK("polygon");
+const polygonSDK = new ThirdwebSDK('polygon');
 const earlyAccessNfts = polygonSDK.getEditionDrop(
-  "0xa9e893cc12026a2f6bd826fdb295eac9c18a7e88"
+	'0x427c8504A9952744105683Cd3CE179902c5503cE'
 );
 
 // Check to see if the wallet address has an early access NFT
@@ -111,12 +111,12 @@ const numTokensInCollection = await earlyAccessNfts.getTotalCount();
 let userHasToken = false;
 // Check each token in the Edition Drop
 for (let i = 0; i < numTokensInCollection.toNumber(); i++) {
-  // See if they have the token
-  const balance = await earlyAccessNfts.balanceOf(address, i);
-  if (balance.toNumber() > 0) {
-    userHasToken = true;
-    break;
-  }
+	// See if they have the token
+	const balance = await earlyAccessNfts.balanceOf(address, i);
+	if (balance.toNumber() > 0) {
+		userHasToken = true;
+		break;
+	}
 }
 ```
 
@@ -129,7 +129,7 @@ If they do, we generate a mint signature from the admin wallet on the server-sid
     "goerli"
   );
   const signatureDrop = goerliSDK.getSignatureDrop(
-    "0xb90a18e9270d44F6e7D06e5Eac32C6Ea881CCaB2"
+    "0x427c8504A9952744105683Cd3CE179902c5503cE"
   );
 
   // If the user has an early access NFT, generate a mint signature
